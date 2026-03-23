@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lapsnail | Outdoor Solar Lighting</title>
+  <meta name="description" content="Lapsnail creates warm, beautiful outdoor spaces with elegant solar lighting designed for comfort, atmosphere, and everyday ease." />
+  <style>
+    :root {
+      --bg: #f7f3ec;
+      --surface: #fffdf9;
+      --surface-2: #f2ece2;
+      --text: #2f261d;
+      --muted: #6d6256;
+      --line: #e6ddd1;
+      --accent: #a97a45;
+      --accent-dark: #80592d;
+      --shadow: 0 18px 40px rgba(47, 38, 29, 0.08);
+      --radius-xl: 28px;
+      --radius-lg: 20px;
+      --max: 1180px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(169, 122, 69, 0.08), transparent 28%),
+        linear-gradient(180deg, #fbf8f2 0%, #f5efe5 100%);
+      line-height: 1.6;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    .container {
+      width: min(calc(100% - 32px), var(--max));
+      margin: 0 auto;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(14px);
+      background: rgba(251, 248, 242, 0.8);
+      border-bottom: 1px solid rgba(230, 221, 209, 0.7);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 0;
+      gap: 20px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .brand-mark {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, #c89c65 0%, #8e6436 100%);
+      color: white;
+      box-shadow: var(--shadow);
+      font-size: 18px;
+    }
+
+    .brand-copy small {
+      display: block;
+      color: var(--muted);
+      font-weight: 500;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 13px 20px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      font-weight: 600;
+      transition: 0.25s ease;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+      color: white;
+      box-shadow: 0 14px 24px rgba(128, 89, 45, 0.2);
+    }
+
+    .btn-primary:hover { transform: translateY(-1px); }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.7);
+      border-color: var(--line);
+      color: var(--text);
+    }
+
+    .hero {
+      padding: 72px 0 52px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 36px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(169, 122, 69, 0.1);
+      color: var(--accent-dark);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(40px, 6vw, 72px);
+      line-height: 1.04;
+      margin: 18px 0 18px;
+      letter-spacing: -0.03em;
+    }
+
+    .hero p {
+      color: var(--muted);
+      font-size: 18px;
+      max-width: 640px;
+      margin: 0 0 28px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 28px;
+    }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      max-width: 680px;
+    }
+
+    .stat {
+      background: rgba(255,255,255,0.64);
+      border: 1px solid rgba(230, 221, 209, 0.9);
+      border-radius: 18px;
+      padding: 16px;
+      box-shadow: var(--shadow);
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 18px;
+      margin-bottom: 4px;
+    }
+
+    .stat span {
+      display: block;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .hero-visual {
+      position: relative;
+    }
+
+    .hero-card {
+      position: relative;
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      min-height: 640px;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(255,255,255,0.5);
+      background:
+        linear-gradient(180deg, rgba(21, 24, 31, 0.06), rgba(21, 24, 31, 0.45)),
+        radial-gradient(circle at 65% 30%, rgba(255, 246, 215, 0.25), transparent 22%),
+        linear-gradient(180deg, #e8dac8 0%, #9d8a73 45%, #283241 100%);
+    }
+
+    .hero-scene {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 67% 28%, rgba(255, 241, 193, 0.65), transparent 15%),
+        linear-gradient(180deg, rgba(27, 37, 46, 0) 0%, rgba(20, 23, 29, 0.12) 38%, rgba(18, 20, 25, 0.35) 100%);
+    }
+
+    .glow {
+      position: absolute;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 235, 173, 0.58) 0%, rgba(255, 235, 173, 0.18) 42%, rgba(255, 235, 173, 0) 72%);
+      right: 102px;
+      top: 122px;
+      filter: blur(6px);
+    }
+
+    .lamp {
+      position: absolute;
+      right: 102px;
+      bottom: 88px;
+      width: 116px;
+      height: 430px;
+    }
+
+    .lamp-shade {
+      width: 116px;
+      height: 64px;
+      border-radius: 58px 58px 18px 18px;
+      background: linear-gradient(180deg, #f4eee7 0%, #d9c7b1 100%);
+      box-shadow: 0 0 40px rgba(255, 236, 186, 0.3);
+      border: 1px solid rgba(255,255,255,0.45);
+    }
+
+    .lamp-neck {
+      width: 10px;
+      height: 24px;
+      margin: 0 auto;
+      background: linear-gradient(180deg, #5d4a34 0%, #2d241a 100%);
+      border-radius: 10px;
+    }
+
+    .lamp-pole {
+      width: 12px;
+      height: 260px;
+      margin: 0 auto;
+      background: linear-gradient(180deg, #705338 0%, #3d2f22 100%);
+      border-radius: 999px;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.08);
+    }
+
+    .lamp-base {
+      width: 74px;
+      height: 74px;
+      margin: -6px auto 0;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, #79634d 0%, #4b3a2a 60%, #2f241b 100%);
+      box-shadow: 0 10px 24px rgba(0,0,0,0.22);
+    }
+
+    .floating-card {
+      position: absolute;
+      left: 24px;
+      bottom: 24px;
+      width: min(320px, calc(100% - 48px));
+      background: rgba(255,255,255,0.9);
+      border: 1px solid rgba(230, 221, 209, 0.95);
+      border-radius: 22px;
+      padding: 20px;
+      box-shadow: var(--shadow);
+    }
+
+    .floating-card h3 {
+      margin: 0 0 8px;
+      font-size: 20px;
+    }
+
+    .floating-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    section {
+      padding: 32px 0 84px;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      align-items: end;
+      margin-bottom: 28px;
+    }
+
+    .section-head h2 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(30px, 4vw, 48px);
+      line-height: 1.12;
+      margin: 10px 0 0;
+    }
+
+    .section-head p {
+      max-width: 520px;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.82);
+      border: 1px solid rgba(230, 221, 209, 0.95);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .card-icon {
+      width: 48px;
+      height: 48px;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      background: var(--surface-2);
+      margin-bottom: 16px;
+      font-size: 22px;
+    }
+
+    .card h3 {
+      margin: 0 0 10px;
+      font-size: 22px;
+    }
+
+    .card p,
+    .card li,
+    .muted {
+      color: var(--muted);
+    }
+
+    .product-wrap {
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: 26px;
+      align-items: stretch;
+    }
+
+    .product-image {
+      background: linear-gradient(180deg, #ded1c2 0%, #b9aa98 42%, #6f665d 100%);
+      border-radius: var(--radius-xl);
+      min-height: 520px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .product-stage {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 50% 34%, rgba(255, 238, 189, 0.52), transparent 16%),
+        linear-gradient(180deg, rgba(255,255,255,0.04) 0%, rgba(18,20,25,0.08) 50%, rgba(18,20,25,0.22) 100%);
+    }
+
+    .product-lamp {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 42px;
+      width: 146px;
+      height: 430px;
+    }
+
+    .product-panel {
+      background: rgba(255,255,255,0.82);
+      border: 1px solid rgba(230, 221, 209, 0.95);
+      border-radius: var(--radius-xl);
+      padding: 30px;
+      box-shadow: var(--shadow);
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 16px 0 18px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 9px 12px;
+      border-radius: 999px;
+      background: var(--surface-2);
+      color: var(--accent-dark);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .spec-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 22px;
+    }
+
+    .spec {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 16px;
+    }
+
+    .spec strong {
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .story {
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .story-quote {
+      padding: 32px;
+      border-radius: var(--radius-xl);
+      background: linear-gradient(180deg, #fff8ef 0%, #f1e7d9 100%);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .story-quote p {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(24px, 3vw, 38px);
+      line-height: 1.22;
+      margin: 0 0 16px;
+    }
+
+    .story-body {
+      background: rgba(255,255,255,0.82);
+      border: 1px solid rgba(230, 221, 209, 0.95);
+      border-radius: var(--radius-xl);
+      padding: 32px;
+      box-shadow: var(--shadow);
+    }
+
+    .story-body h3,
+    .cta h2 {
+      margin-top: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 34px;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+    }
+
+    .contact-item {
+      background: rgba(255,255,255,0.82);
+      border: 1px solid rgba(230, 221, 209, 0.95);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .contact-item span {
+      display: block;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+
+    .contact-item strong {
+      display: block;
+      font-size: 22px;
+      margin-bottom: 8px;
+    }
+
+    .cta {
+      padding: 34px;
+      background: linear-gradient(135deg, #4d3a28 0%, #7c5b37 45%, #b88b54 100%);
+      color: white;
+      border-radius: 32px;
+      box-shadow: 0 20px 45px rgba(59, 43, 26, 0.24);
+    }
+
+    .cta p { color: rgba(255,255,255,0.84); }
+
+    .site-footer {
+      padding: 28px 0 56px;
+      color: var(--muted);
+    }
+
+    .footer-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: center;
+      border-top: 1px solid rgba(230, 221, 209, 0.9);
+      padding-top: 18px;
+      font-size: 14px;
+    }
+
+    @media (max-width: 980px) {
+      .hero-grid,
+      .product-wrap,
+      .story,
+      .contact-grid,
+      .grid-3 {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-card,
+      .product-image {
+        min-height: 480px;
+      }
+
+      .section-head,
+      .footer-row,
+      .nav {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .nav-links {
+        flex-wrap: wrap;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .hero {
+        padding-top: 48px;
+      }
+
+      .hero-stats,
+      .spec-list {
+        grid-template-columns: 1fr;
+      }
+
+      h1 {
+        font-size: 42px;
+      }
+
+      .hero p {
+        font-size: 16px;
+      }
+
+      .hero-card,
+      .product-image {
+        min-height: 420px;
+      }
+
+      .lamp,
+      .product-lamp {
+        transform: scale(0.88);
+        transform-origin: bottom center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="#home" aria-label="Lapsnail home">
+        <div class="brand-mark">L</div>
+        <div class="brand-copy">
+          Lapsnail
+          <small>Outdoor Solar Lighting</small>
+        </div>
+      </a>
+
+      <nav class="nav-links">
+        <a href="#products">Products</a>
+        <a href="#story">Our Story</a>
+        <a href="#why">Why Lapsnail</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <a class="btn btn-primary" href="#contact">Become a Partner</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">Warm Outdoor Living Starts Here</div>
+          <h1>Elegant solar lighting for spaces that feel like home.</h1>
+          <p>
+            Lapsnail creates outdoor solar lamps that bring beauty, warmth, and comfort to patios, decks, gardens, and everyday home spaces. Designed around atmosphere and ease, our lighting helps transform outdoor living into a place people want to stay.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#products">Explore Best Seller</a>
+            <a class="btn btn-secondary" href="#story">Read Our Story</a>
+          </div>
+          <div class="hero-stats">
+            <div class="stat">
+              <strong>Solar Powered</strong>
+              <span>No outlet needed for daily outdoor ambiance.</span>
+            </div>
+            <div class="stat">
+              <strong>Warm Presence</strong>
+              <span>Designed to elevate the emotional feel of a space.</span>
+            </div>
+            <div class="stat">
+              <strong>Brand Focus</strong>
+              <span>Specialized in outdoor solar lighting collections.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <div class="hero-card" aria-hidden="true">
+            <div class="hero-scene"></div>
+            <div class="glow"></div>
+            <div class="lamp">
+              <div class="lamp-shade"></div>
+              <div class="lamp-neck"></div>
+              <div class="lamp-pole"></div>
+              <div class="lamp-base"></div>
+            </div>
+            <div class="floating-card">
+              <h3>Signature Solar Floor Lamp</h3>
+              <p>
+                The hero product of the current Lapsnail collection, created to bring a refined lamp silhouette into outdoor spaces with cordless solar convenience.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="why">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">Why Lapsnail</div>
+            <h2>Designed for atmosphere, not just illumination.</h2>
+          </div>
+          <p>
+            We focus on the emotional value of light in outdoor living: comfort, ease, visual harmony, and a sense of belonging that turns a backyard or patio into a welcoming extension of the home.
+          </p>
+        </div>
+
+        <div class="grid-3">
+          <article class="card">
+            <div class="card-icon">☀️</div>
+            <h3>Solar Simplicity</h3>
+            <p>
+              Cordless solar operation makes setup cleaner and easier, while keeping everyday use practical for outdoor environments.
+            </p>
+          </article>
+          <article class="card">
+            <div class="card-icon">🏡</div>
+            <h3>Home-Centered Design</h3>
+            <p>
+              Each product is shaped to complement the home and surrounding landscape, not overpower it. The result feels calm, warm, and intentional.
+            </p>
+          </article>
+          <article class="card">
+            <div class="card-icon">✨</div>
+            <h3>Decor Meets Function</h3>
+            <p>
+              Lapsnail balances decorative presence with useful outdoor lighting, helping customers create spaces that look beautiful both day and night.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="products">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">Featured Product</div>
+            <h2>Our signature outdoor solar floor lamp.</h2>
+          </div>
+          <p>
+            Built as a statement piece for patios, decks, porches, poolsides, and garden seating areas, this lamp leads the first chapter of the Lapsnail collection.
+          </p>
+        </div>
+
+        <div class="product-wrap">
+          <div class="product-image" aria-hidden="true">
+            <div class="product-stage"></div>
+            <div class="glow" style="left:50%; right:auto; transform:translateX(-50%); top:112px;"></div>
+            <div class="product-lamp">
+              <div class="lamp-shade" style="width:146px;height:76px;border-radius:72px 72px 22px 22px;"></div>
+              <div class="lamp-neck"></div>
+              <div class="lamp-pole" style="height:270px;"></div>
+              <div class="lamp-base" style="width:84px;height:84px;"></div>
+            </div>
+          </div>
+
+          <div class="product-panel">
+            <div class="eyebrow">Best Seller Focus</div>
+            <h3 style="font-size:36px; margin:16px 0 12px; font-family: Georgia, 'Times New Roman', serif;">Lapsnail Solar Floor Lamp</h3>
+            <p class="muted">
+              A freestanding outdoor solar lamp that combines the familiar elegance of an indoor floor lamp with weather-ready outdoor usability. It is designed to help homeowners create a more complete, elevated outdoor living scene.
+            </p>
+
+            <div class="tag-row">
+              <div class="tag">Outdoor Ambience</div>
+              <div class="tag">Solar Convenience</div>
+              <div class="tag">Cordless Placement</div>
+              <div class="tag">Decorative Statement</div>
+            </div>
+
+            <div class="spec-list">
+              <div class="spec">
+                <strong>Application</strong>
+                <span class="muted">Patio, deck, porch, garden, poolside, backyard lounge area</span>
+              </div>
+              <div class="spec">
+                <strong>Core Value</strong>
+                <span class="muted">Creates a warm and beautiful outdoor space with minimal installation effort</span>
+              </div>
+              <div class="spec">
+                <strong>Design Direction</strong>
+                <span class="muted">Refined silhouette inspired by interior floor lamps, adapted for outdoor use</span>
+              </div>
+              <div class="spec">
+                <strong>Brand Role</strong>
+                <span class="muted">Hero product driving the visual identity of the Lapsnail website</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="story">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">Our Story</div>
+            <h2>Inspired by the comfort of a shell.</h2>
+          </div>
+          <p>
+            The Lapsnail brand story begins with a simple idea: home should feel safe, warm, beautiful, and deeply personal. That philosophy guides how we think about light.
+          </p>
+        </div>
+
+        <div class="story">
+          <div class="story-quote">
+            <p>“Home is where the Shell is.”</p>
+            <div class="muted">
+              Snail’s motto reflects the comfort, satisfaction, and sacred sense of home that inspired the Lapsnail brand.
+            </div>
+          </div>
+
+          <div class="story-body">
+            <h3>Lapsnail Space</h3>
+            <p>
+              Lapsnail Space is inspired by the snail. Across cultures, the snail has long carried symbolic meaning connected to home, shelter, and sacred personal space. Within its shell, the snail finds comfort and satisfaction.
+            </p>
+            <p>
+              We hope to create a warm and beautiful space through our lamps, as comfortable and satisfying as a snail’s shell is to a snail. For us, lighting is not only about brightness. It is about emotion, atmosphere, and the feeling that a space truly belongs to you.
+            </p>
+            <p>
+              This is why Lapsnail is dedicated to outdoor solar lighting that feels inviting, elegant, and easy to live with — products that help turn outdoor areas into an extension of home.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">Product Categories</div>
+            <h2>Growing around outdoor solar living.</h2>
+          </div>
+          <p>
+            While the solar floor lamp leads the current launch, the Lapsnail vision is broader: a coordinated outdoor lighting world centered on beauty, comfort, and easy solar living.
+          </p>
+        </div>
+
+        <div class="grid-3">
+          <article class="card">
+            <div class="card-icon">🛋️</div>
+            <h3>Solar Floor Lamps</h3>
+            <p>
+              Statement lighting for patios and lounge zones, bringing the familiar warmth of indoor lamps into open-air spaces.
+            </p>
+          </article>
+          <article class="card">
+            <div class="card-icon">🌿</div>
+            <h3>Garden Accent Lights</h3>
+            <p>
+              Decorative solar pieces designed to elevate pathways, flower beds, and quiet corners of the yard.
+            </p>
+          </article>
+          <article class="card">
+            <div class="card-icon">🌙</div>
+            <h3>Outdoor Atmosphere Series</h3>
+            <p>
+              Future collections focused on coordinated ambient lighting for porches, decks, and evening outdoor living.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">Contact</div>
+            <h2>Let’s build beautiful outdoor space together.</h2>
+          </div>
+          <p>
+            This section is ready for your official business contact details, Amazon storefront link, wholesale inquiry email, or social channels.
+          </p>
+        </div>
+
+        <div class="contact-grid">
+          <div class="contact-item">
+            <span>Email</span>
+            <strong>hello@lapsnail.com</strong>
+            <div class="muted">Replace with your real business email before publishing.</div>
+          </div>
+          <div class="contact-item">
+            <span>Business Inquiry</span>
+            <strong>Wholesale / Distribution / Collaboration</strong>
+            <div class="muted">Use this area for dealer, retail, Amazon, or project-based inquiries.</div>
+          </div>
+        </div>
+
+        <div style="height:22px"></div>
+
+        <div class="cta">
+          <h2>Lapsnail brings the feeling of home outdoors.</h2>
+          <p>
+            Start with a focused, elegant brand site today, then expand into more products, dealer pages, Amazon links, and campaign landing pages as the brand grows.
+          </p>
+          <a class="btn btn-secondary" href="mailto:hello@lapsnail.com" style="background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.22); color: white;">Contact Lapsnail</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-row">
+      <div>© <span id="year"></span> Lapsnail. All rights reserved.</div>
+      <div>Outdoor Solar Lighting for Warm and Beautiful Spaces.</div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
